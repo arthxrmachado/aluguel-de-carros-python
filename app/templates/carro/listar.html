@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+        {% if request.user.is_authenticated %}
+            <a href="/logouts/">Encerrar sessão</a>
+            <a href="/cliente/trocarSenha/">Trocar de Senha</a>
+            <hr>
+
+            <div class="container">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Diária</th>
+                    </tr>
+                    {% for carro in carros %}
+                    <tr>
+                        <td><a href="{% url 'alugar' carro.id %}">{{ carro.placa }}</a></td>
+                        <td>{{ carro.modelo }}</td>
+                        <td>{{ carro.marca }}</td>
+                        <td>R$ {{ carro.diaria }},00</td>
+                    </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+        {% else %}
+            <h1>Acesso negado!</h1>
+        {% endif %}
+
+<br><a href="/">Voltar para página inicial</a>
+{% endblock %}
+

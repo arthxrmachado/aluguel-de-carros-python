@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <a href="/logouts/">Encerrar sessão</a>
+        <a href="/cliente/trocarSenha">Trocar de Senha</a>
+        <hr>
+
+        {% if perms.admin.all_permissions %}
+            <a href="/carro/listar">Listar carros</a><br>
+            <a href="/carro/addCar">Adicionar novo carro</a><br>
+        {% endif %}
+
+        {% if perms.client.basic_permissions %}
+            <a href="/carro/listar">Listar carros</a><br>
+        {% endif %}
+    {% else %}
+        <h1>Acesso negado!</h1>
+    {% endif %}
+{% endblock %}

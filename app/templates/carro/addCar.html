@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <a href="/logouts/">Encerrar sessão</a>
+        <a href="/cliente/trocarSenha/">Trocar de Senha</a>
+        <hr>
+
+        {% if perms.admin.all_permissions %}
+          <form name="form-cars" id="formCars" method="post" action="/storeCar/">
+              <div class="col-6 mt-4 m-auto">
+                  {% if msg %}
+                      <div class="alert {{class}}">
+                          {{msg}}
+                      </div>
+                  {% endif %}
+
+                  {% csrf_token %}
+                  <input class="form-control mt-4" type="text" name="placa" id="placa" placeholder="Digite a placa">
+                  <input class="form-control mt-4" type="text" name="modelo" id="modelo" placeholder="Digite o modelo">
+                  <input class="form-control mt-4" type="text" name="marca" id="marca" placeholder="Digite a marca">
+                  <input class="form-control mt-4" type="text" name="diaria" id="diaria" placeholder="Digite o preço da diária">
+                  <input class="btn btn-primary mt-4" type="submit" value="Cadastrar">
+
+                  <br><br><a href="/dashboard">Voltar para página inicial</a>
+              </div>
+          </form>
+        {% endif %}
+
+    {% else %}
+        <h1>Acesso negado!</h1>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <a href="/logouts/">Encerrar sessão</a>
+        <a href="/cliente/trocarSenha/">Trocar de Senha</a>
+        <hr>
+
+          <form name="form-alugar" id="formAlugar" method="post" action="/storeAlugar/">
+              <div class="col-6 mt-4 m-auto">
+
+                  {% csrf_token %}
+                  <input class="form-control mt-4" type="date" name="data_agendamento" id="data_agendamento"
+                         placeholder="Escolha o dia em que deseja começar a alugar">
+                  <input class="form-control mt-4" type="text" name="dias_agendados" id="dias_agendados"
+                         placeholder="Digite por quantos dias deseja agendar">
+                  <input class="btn btn-primary mt-4" type="submit" value="Alugar">
+
+                  <br><br><a href="/dashboard">Voltar para página inicial</a>
+              </div>
+          </form>
+
+    {% endif %}
+{% endblock %}
